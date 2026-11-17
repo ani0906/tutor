@@ -19,7 +19,6 @@
       --forest-light: #e3ebe6;
       --terracotta: #8a3324;
       --terracotta-light: #f3e4e1;
-      --ochre: #8c6d2e;
     }
 
     * {
@@ -140,17 +139,6 @@
       color: var(--paper-light);
     }
 
-    .btn-terracotta {
-      background: var(--terracotta);
-      border-color: var(--terracotta);
-      color: var(--paper-light);
-    }
-
-    .btn-terracotta:hover {
-      background: var(--ink);
-      border-color: var(--ink);
-    }
-
     /* 主容器 */
     main {
       max-width: 1120px;
@@ -183,7 +171,7 @@
       font-weight: 700;
     }
 
-    /* 首頁雜誌目錄網格 */
+    /* 首頁八族雜誌目錄網格 */
     .index-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -258,63 +246,78 @@
       padding-top: 10px;
     }
 
-    /* 常見化合物獨立專欄區塊 */
-    .feature-spread {
+    /* 首頁下方雙欄專題區（過渡金屬 ＆ 常見化合物） */
+    .special-grid {
       margin-top: 32px;
-      border: 1.5px solid var(--line);
-      background: var(--paper-light);
       display: grid;
-      grid-template-columns: 280px 1fr;
-      cursor: pointer;
-      transition: all 0.18s ease;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
     }
 
     @media (max-width: 720px) {
-      .feature-spread { grid-template-columns: 1fr; }
+      .special-grid { grid-template-columns: 1fr; }
     }
 
-    .feature-spread:hover {
-      background: var(--terracotta);
-      color: var(--paper-light);
-    }
-
-    .feature-spread:hover .feature-list {
-      color: var(--paper-light);
-    }
-
-    .feature-badge-col {
-      background: var(--terracotta);
-      color: var(--paper-light);
-      padding: 28px 24px;
+    .special-card {
+      border: 1.5px solid var(--line);
+      padding: 28px 26px;
+      cursor: pointer;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      border-right: 1.5px solid var(--line);
+      min-height: 168px;
+      transition: all 0.18s ease;
     }
 
-    @media (max-width: 720px) {
-      .feature-badge-col {
-        border-right: none;
-        border-bottom: 1.5px solid var(--line);
-      }
-    }
-
-    .feature-content-col {
-      padding: 28px 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .feature-list {
-      font-size: 1.08rem;
-      font-weight: 700;
+    .special-card.forest-theme {
+      background: var(--paper-light);
       color: var(--ink);
-      line-height: 1.8;
     }
 
-    /* 週期表位置圖（建築線框風） */
+    .special-card.forest-theme:hover {
+      background: var(--forest);
+      color: var(--paper-light);
+    }
+
+    .special-card.terracotta-theme {
+      background: var(--terracotta);
+      color: var(--paper-light);
+    }
+
+    .special-card.terracotta-theme:hover {
+      background: var(--ink);
+      color: var(--paper-light);
+    }
+
+    .special-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.88rem;
+      letter-spacing: 0.14em;
+      font-weight: 800;
+      opacity: 0.85;
+    }
+
+    .special-card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 24px;
+    }
+
+    .special-card-title {
+      font-size: 1.7rem;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    .special-card-arrow {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    /* 週期表位置圖 */
     .ptable-frame {
       border: 1.5px solid var(--line);
       background: var(--paper-light);
@@ -399,6 +402,15 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 14px;
+      transition: background 0.15s ease;
+    }
+
+    .specimen-card.clickable {
+      cursor: pointer;
+    }
+
+    .specimen-card.clickable:hover {
+      background: #f0ece1;
     }
 
     .specimen-top {
@@ -411,23 +423,13 @@
       letter-spacing: 0.1em;
     }
 
-    .audio-btn {
-      background: transparent;
-      border: 1px solid var(--line);
-      padding: 3px 10px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      font-family: inherit;
-      color: var(--ink);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .audio-btn:hover {
-      background: var(--ink);
-      color: var(--paper-light);
+    .reaction-tag {
+      border: 1px solid var(--terracotta);
+      color: var(--terracotta);
+      padding: 2px 8px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
     }
 
     .specimen-main {
@@ -439,7 +441,7 @@
     }
 
     .specimen-symbol {
-      font-size: 2.5rem;
+      font-size: 2.4rem;
       font-weight: 800;
       color: var(--forest);
       line-height: 1.1;
@@ -620,6 +622,100 @@
       font-weight: 700;
       color: var(--terracotta);
     }
+
+    /* 彈出視窗（輸入姓名 ＆ 化學反應式檢視） */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 25, 24, 0.65);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 999;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-panel {
+      background: var(--paper-light);
+      border: 2px solid var(--line);
+      max-width: 560px;
+      width: 100%;
+      padding: 28px 28px;
+      box-shadow: 8px 8px 0 var(--ink);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1.5px solid var(--line);
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+    }
+
+    .modal-title {
+      font-size: 1.45rem;
+      font-weight: 900;
+    }
+
+    .modal-close {
+      background: transparent;
+      border: 1px solid var(--line);
+      width: 32px;
+      height: 32px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+      color: var(--ink);
+    }
+
+    .modal-close:hover {
+      background: var(--ink);
+      color: var(--paper-light);
+    }
+
+    .name-input {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      font-family: inherit;
+      border: 1.5px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      margin: 14px 0 20px;
+    }
+
+    .name-input:focus {
+      outline: none;
+      background: #ffffff;
+      border-color: var(--forest);
+    }
+
+    .reaction-item {
+      border: 1px solid var(--line-soft);
+      background: var(--paper);
+      padding: 14px 16px;
+      margin-bottom: 12px;
+    }
+
+    .reaction-desc {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--terracotta);
+      margin-bottom: 6px;
+    }
+
+    .reaction-eq {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: 0.03em;
+    }
   </style>
 </head>
 <body>
@@ -630,15 +726,45 @@
 
 <main id="app"></main>
 
+<!-- 學生姓名輸入視窗 -->
+<div class="modal-backdrop" id="name-modal">
+  <div class="modal-panel">
+    <div class="modal-header">
+      <span class="modal-title">請輸入你的名字</span>
+    </div>
+    <p style="font-size:0.98rem; color:var(--ink-muted); font-weight:700;">
+      輸入你的名字或小名，測驗完成後會自動記錄練習進度給老師。
+    </p>
+    <input type="text" id="student-name-input" class="name-input" placeholder="例如：小宇、王小明" />
+    <div style="display:flex; justify-content:flex-end;">
+      <button class="btn btn-solid" onclick="saveStudentName()">確認進入 ↗</button>
+    </div>
+  </div>
+</div>
+
+<!-- 化合物反應式詳情視窗 -->
+<div class="modal-backdrop" id="compound-modal" onclick="closeCompoundModal(event)">
+  <div class="modal-panel" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div>
+        <span class="serif" style="font-size:0.8rem; color:var(--ink-muted); letter-spacing:0.14em; font-weight:800;">CHEMICAL REACTIONS</span>
+        <div class="modal-title" id="modal-compound-title"></div>
+      </div>
+      <button class="modal-close" onclick="closeCompoundModal()">✕</button>
+    </div>
+    <p id="modal-compound-note" style="font-size:0.98rem; font-weight:700; color:var(--ink-muted); margin-bottom:16px;"></p>
+    <div id="modal-reactions-list"></div>
+  </div>
+</div>
+
 <script>
   // ==========================================
   // 【設定區】請將 Google Apps Script 部署網址貼在引號內
   // ==========================================
   const GAS_URL = "";
-  const DEFAULT_STUDENT_NAME = "資源班考生";
 
   // ==========================================
-  // 國中必背八族元素題庫（精簡關鍵提示版）
+  // 國中必背八族元素題庫（台灣國中理化常用語）
   // ==========================================
   const ELEMENT_GROUPS = [
     {
@@ -648,9 +774,9 @@
       subtitle: "鹼金屬",
       items: [
         { symbol: "H", zh: "氫", note: "最輕氣體 · 非金屬", confusable: ["He", "Hg"] },
-        { symbol: "Li", zh: "鋰", note: "最輕金屬 · 鋰電池", confusable: ["I", "Al"] },
-        { symbol: "Na", zh: "鈉", note: "食鹽成分 · 儲於油中", confusable: ["K", "N", "Ne"] },
-        { symbol: "K", zh: "鉀", note: "比鈉更活潑", confusable: ["Na", "Ca", "P"] }
+        { symbol: "Li", zh: "鋰", note: "最輕金屬 · 鋰電池材料", confusable: ["I", "Al"] },
+        { symbol: "Na", zh: "鈉", note: "食鹽成分 · 儲存在礦物油中", confusable: ["K", "N", "Ne"] },
+        { symbol: "K", zh: "鉀", note: "化學性質比鈉更活潑", confusable: ["Na", "Ca", "P"] }
       ]
     },
     {
@@ -660,9 +786,9 @@
       subtitle: "鹼土金屬",
       items: [
         { symbol: "Be", zh: "鈹", note: "讀音：皮", confusable: ["B", "Ba", "Br"] },
-        { symbol: "Mg", zh: "鎂", note: "燃燒發強烈白光", confusable: ["Mn", "Ag", "Hg"] },
+        { symbol: "Mg", zh: "鎂", note: "燃燒發出強烈白光", confusable: ["Mn", "Ag", "Hg"] },
         { symbol: "Ca", zh: "鈣", note: "骨骼與大理石成分", confusable: ["C", "K", "Cu"] },
-        { symbol: "Ba", zh: "鋇", note: "讀音：貝 · X光顯影劑", confusable: ["Be", "B", "Br"] }
+        { symbol: "Ba", zh: "鋇", note: "讀音：貝 · 醫療檢查用", confusable: ["Be", "B", "Br"] }
       ]
     },
     {
@@ -672,8 +798,8 @@
       subtitle: "硼族",
       items: [
         { symbol: "B", zh: "硼", note: "讀音：朋 · 類金屬", confusable: ["Be", "Ba", "Br"] },
-        { symbol: "Al", zh: "鋁", note: "地殼含量最多金屬", confusable: ["Ag", "Ar", "Au"] },
-        { symbol: "Ga", zh: "鎵", note: "讀音：家 · 掌心即融", confusable: ["Ca", "Ge"] }
+        { symbol: "Al", zh: "鋁", note: "地殼含量最多的金屬", confusable: ["Ag", "Ar", "Au"] },
+        { symbol: "Ga", zh: "鎵", note: "讀音：家 · 熔點低，掌心即融", confusable: ["Ca", "Ge"] }
       ]
     },
     {
@@ -683,9 +809,9 @@
       subtitle: "碳族",
       items: [
         { symbol: "C", zh: "碳", note: "鑽石與石墨成分", confusable: ["Ca", "Cl", "Cu"] },
-        { symbol: "Si", zh: "矽", note: "讀音：夕 · 半導體晶片", confusable: ["S", "Ag", "Sn"] },
-        { symbol: "Sn", zh: "錫", note: "讀音：席 · 焊錫材料", confusable: ["Si", "S", "Zn"] },
-        { symbol: "Pb", zh: "鉛", note: "鉛蓄電池 · 高密度金屬", confusable: ["P", "Pt", "Be"] }
+        { symbol: "Si", zh: "矽", note: "讀音：夕 · 半導體晶片材料", confusable: ["S", "Ag", "Sn"] },
+        { symbol: "Sn", zh: "錫", note: "讀音：席 · 焊錫與馬口鐵材料", confusable: ["Si", "S", "Zn"] },
+        { symbol: "Pb", zh: "鉛", note: "鉛蓄電池電極 · 密度大", confusable: ["P", "Pt", "Be"] }
       ]
     },
     {
@@ -694,9 +820,9 @@
       title: "第 5A 族",
       subtitle: "氮族",
       items: [
-        { symbol: "N", zh: "氮", note: "佔空氣約 78%", confusable: ["Na", "Ne", "Ni"] },
-        { symbol: "P", zh: "磷", note: "火柴盒摩擦面成分", confusable: ["Pb", "K", "F"] },
-        { symbol: "As", zh: "砷", note: "讀音：申 · 砒霜成分", confusable: ["Ar", "Ag", "Al"] }
+        { symbol: "N", zh: "氮", note: "佔空氣體積約 78%", confusable: ["Na", "Ne", "Ni"] },
+        { symbol: "P", zh: "磷", note: "火柴盒側面摩擦面成分", confusable: ["Pb", "K", "F"] },
+        { symbol: "As", zh: "砷", note: "讀音：申 · 類金屬", confusable: ["Ar", "Ag", "Al"] }
       ]
     },
     {
@@ -705,8 +831,8 @@
       title: "第 6A 族",
       subtitle: "氧族",
       items: [
-        { symbol: "O", zh: "氧", note: "佔空氣約 21% · 助燃", confusable: ["C", "Au", "Os"] },
-        { symbol: "S", zh: "硫", note: "黃色固體 · 火山硫磺", confusable: ["Si", "Sn", "Na"] }
+        { symbol: "O", zh: "氧", note: "佔空氣體積約 21% · 助燃性", confusable: ["C", "Au", "Os"] },
+        { symbol: "S", zh: "硫", note: "黃色固體 · 火山口常見", confusable: ["Si", "Sn", "Na"] }
       ]
     },
     {
@@ -715,10 +841,10 @@
       title: "第 7A 族",
       subtitle: "鹵素",
       items: [
-        { symbol: "F", zh: "氟", note: "讀音：弗 · 牙膏防蛀", confusable: ["Fe", "P", "Cl"] },
-        { symbol: "Cl", zh: "氯", note: "讀音：綠 · 泳池消毒", confusable: ["C", "Ca", "Cr"] },
-        { symbol: "Br", zh: "溴", note: "讀音：臭 · 唯一液態非金屬", confusable: ["B", "Be", "Ba"] },
-        { symbol: "I", zh: "碘", note: "遇澱粉變藍紫色", confusable: ["Li", "Fe", "Cl"] }
+        { symbol: "F", zh: "氟", note: "讀音：弗 · 牙膏含氟防蛀", confusable: ["Fe", "P", "Cl"] },
+        { symbol: "Cl", zh: "氯", note: "讀音：綠 · 自來水消毒", confusable: ["C", "Ca", "Cr"] },
+        { symbol: "Br", zh: "溴", note: "讀音：臭 · 常溫唯一液態非金屬", confusable: ["B", "Be", "Ba"] },
+        { symbol: "I", zh: "碘", note: "遇澱粉液變藍紫色", confusable: ["Li", "Fe", "Cl"] }
       ]
     },
     {
@@ -727,36 +853,183 @@
       title: "第 8A 族",
       subtitle: "鈍氣",
       items: [
-        { symbol: "He", zh: "氦", note: "讀音：害 · 安全氣球填充", confusable: ["H", "Ne", "Hg"] },
+        { symbol: "He", zh: "氦", note: "讀音：害 · 填充氣球，不助燃", confusable: ["H", "Ne", "Hg"] },
         { symbol: "Ne", zh: "氖", note: "讀音：乃 · 霓虹燈發紅光", confusable: ["Na", "N", "He"] },
-        { symbol: "Ar", zh: "氬", note: "讀音：亞 · 空氣含量第三", confusable: ["Al", "Ag", "As"] }
+        { symbol: "Ar", zh: "氬", note: "讀音：亞 · 空氣含量第三多的氣體", confusable: ["Al", "Ag", "As"] }
       ]
     }
   ];
 
   // ==========================================
-  // 國中常見化合物題庫
+  // 新增分類：原子序 21–30 與常見金屬元素
+  // ==========================================
+  const TRANSITION_CATEGORY = {
+    id: "TRANSITION",
+    num: "09",
+    title: "原子序 21–30 與常見金屬",
+    subtitle: "過渡元素",
+    items: [
+      { symbol: "Sc", zh: "鈧", note: "原子序 21 · 讀音：康", confusable: ["Si", "S", "Ca"] },
+      { symbol: "Ti", zh: "鈦", note: "原子序 22 · 讀音：太 · 質輕堅固", confusable: ["Tl", "Te", "Sn"] },
+      { symbol: "V", zh: "釩", note: "原子序 23 · 讀音：凡", confusable: ["W", "F", "B"] },
+      { symbol: "Cr", zh: "鉻", note: "原子序 24 · 讀音：各 · 不鏽鋼成分", confusable: ["Cl", "Cu", "Ca"] },
+      { symbol: "Mn", zh: "錳", note: "原子序 25 · 讀音：猛 · 二氧化錳", confusable: ["Mg", "Zn", "Mo"] },
+      { symbol: "Fe", zh: "鐵", note: "原子序 26 · 磁鐵可吸引", confusable: ["F", "Fr", "I"] },
+      { symbol: "Co", zh: "鈷", note: "原子序 27 · 讀音：古 · 氯化亞鈷試紙", confusable: ["Cu", "C", "Cr"] },
+      { symbol: "Ni", zh: "鎳", note: "原子序 28 · 讀音：涅 · 硬幣成分", confusable: ["N", "Na", "Ne"] },
+      { symbol: "Cu", zh: "銅", note: "原子序 29 · 紅褐色 · 導電性佳", confusable: ["Co", "Ca", "Cr"] },
+      { symbol: "Zn", zh: "鋅", note: "原子序 30 · 讀音：新 · 乾電池外殼", confusable: ["Sn", "Zr", "Mn"] },
+      { symbol: "Ag", zh: "銀", note: "導電、導熱性最佳的金屬", confusable: ["Al", "Au", "Ar"] },
+      { symbol: "Au", zh: "金", note: "延展性最佳 · 不易氧化", confusable: ["Ag", "Al", "Cu"] },
+      { symbol: "Hg", zh: "汞", note: "俗稱水銀 · 常溫唯一液態金屬", confusable: ["H", "He", "Mg"] },
+      { symbol: "Pt", zh: "鉑", note: "俗稱白金 · 常用作催化劑", confusable: ["Pb", "P", "Pd"] },
+      { symbol: "W", zh: "鎢", note: "熔點最高的金屬 · 燈泡燈絲", confusable: ["V", "Zn", "Sn"] }
+    ]
+  };
+
+  // ==========================================
+  // 國中常見化合物題庫（附常見相關化學反應式）
   // ==========================================
   const COMPOUND_CATEGORY = {
     id: "COMPOUNDS",
-    num: "09",
+    num: "10",
     title: "常見化合物",
     subtitle: "必考化學式",
     items: [
-      { symbol: "H2O", zh: "水", note: "2 氫 ＋ 1 氧", confusable: ["H2O2", "OH-", "H2SO4"] },
-      { symbol: "CO2", zh: "二氧化碳", note: "使澄清石灰水混濁", confusable: ["CO", "CaCO3", "O2"] },
-      { symbol: "CO", zh: "一氧化碳", note: "無色無味劇毒氣體", confusable: ["CO2", "CuO", "CaO"] },
-      { symbol: "NaCl", zh: "氯化鈉", note: "俗稱：食鹽", confusable: ["NaOH", "Na2CO3", "HCl"] },
-      { symbol: "CaCO3", zh: "碳酸鈣", note: "大理石 · 貝殼成分", confusable: ["Ca(OH)2", "Na2CO3", "CO2"] },
-      { symbol: "HCl", zh: "氯化氫", note: "水溶液為鹽酸", confusable: ["H2SO4", "NaCl", "HNO3"] },
-      { symbol: "H2SO4", zh: "硫酸", note: "強脫水性 · 電瓶液", confusable: ["HCl", "H2O", "Na2SO4"] },
-      { symbol: "NaOH", zh: "氫氧化鈉", note: "俗稱：燒鹼（強鹼）", confusable: ["Ca(OH)2", "NaCl", "NaHCO3"] },
-      { symbol: "Ca(OH)2", zh: "氫氧化鈣", note: "俗稱：熟石灰", confusable: ["CaCO3", "NaOH", "CaO"] },
-      { symbol: "NH3", zh: "氨", note: "刺鼻氣味 · 弱鹼性", confusable: ["CH4", "HNO3", "N2"] },
-      { symbol: "CH4", zh: "甲烷", note: "天然氣主要成分", confusable: ["NH3", "C6H12O6", "CO2"] },
-      { symbol: "C6H12O6", zh: "葡萄糖", note: "光合作用產物", confusable: ["CH4", "CO2", "C2H5OH"] },
-      { symbol: "NaHCO3", zh: "碳酸氫鈉", note: "俗稱：小蘇打", confusable: ["Na2CO3", "NaOH", "CaCO3"] },
-      { symbol: "Na2CO3", zh: "碳酸鈉", note: "俗稱：蘇打（洗滌鹼）", confusable: ["NaHCO3", "CaCO3", "NaOH"] }
+      {
+        symbol: "H2O",
+        zh: "水",
+        note: "2 個氫原子 ＋ 1 個氧原子",
+        confusable: ["H2O2", "OH-", "H2SO4"],
+        reactions: [
+          { desc: "電解水產生氫氣與氧氣", eq: "2H2O → 2H2 + O2" },
+          { desc: "氫氣在空氣中燃燒", eq: "2H2 + O2 → 2H2O" }
+        ]
+      },
+      {
+        symbol: "CO2",
+        zh: "二氧化碳",
+        note: "使澄清石灰水變混濁",
+        confusable: ["CO", "CaCO3", "O2"],
+        reactions: [
+          { desc: "碳完全燃燒", eq: "C + O2 → CO2" },
+          { desc: "大理石與稀鹽酸反應（實驗室製法）", eq: "CaCO3 + 2HCl → CaCl2 + H2O + CO2" },
+          { desc: "通入澄清石灰水產生白色沉澱", eq: "CO2 + Ca(OH)2 → CaCO3 + H2O" }
+        ]
+      },
+      {
+        symbol: "CO",
+        zh: "一氧化碳",
+        note: "無色無味 · 吸入對人體有害",
+        confusable: ["CO2", "CuO", "CaO"],
+        reactions: [
+          { desc: "碳燃燒不完全時產生", eq: "2C + O2 → 2CO" },
+          { desc: "高爐煉鐵（還原氧化鐵）", eq: "Fe2O3 + 3CO → 2Fe + 3CO2" }
+        ]
+      },
+      {
+        symbol: "NaCl",
+        zh: "氯化鈉",
+        note: "俗稱：食鹽",
+        confusable: ["NaOH", "Na2CO3", "HCl"],
+        reactions: [
+          { desc: "鹽酸與氫氧化鈉酸鹼中和", eq: "HCl + NaOH → NaCl + H2O" }
+        ]
+      },
+      {
+        symbol: "CaCO3",
+        zh: "碳酸鈣",
+        note: "大理石 · 貝殼 · 蛋殼成分",
+        confusable: ["Ca(OH)2", "Na2CO3", "CO2"],
+        reactions: [
+          { desc: "與稀鹽酸反應產生二氧化碳", eq: "CaCO3 + 2HCl → CaCl2 + H2O + CO2" },
+          { desc: "高溫加熱分解", eq: "CaCO3 → CaO + CO2" }
+        ]
+      },
+      {
+        symbol: "HCl",
+        zh: "氯化氫",
+        note: "水溶液為鹽酸",
+        confusable: ["H2SO4", "NaCl", "HNO3"],
+        reactions: [
+          { desc: "鎂帶與稀鹽酸反應產生氫氣", eq: "Mg + 2HCl → MgCl2 + H2" },
+          { desc: "與氫氧化鈉酸鹼中和", eq: "HCl + NaOH → NaCl + H2O" }
+        ]
+      },
+      {
+        symbol: "H2SO4",
+        zh: "硫酸",
+        note: "強脫水性 · 鉛蓄電池電解液",
+        confusable: ["HCl", "H2O", "Na2SO4"],
+        reactions: [
+          { desc: "稀硫酸與氫氧化鈉酸鹼中和", eq: "H2SO4 + 2NaOH → Na2SO4 + 2H2O" },
+          { desc: "鋅粒與稀硫酸反應", eq: "Zn + H2SO4 → ZnSO4 + H2" }
+        ]
+      },
+      {
+        symbol: "NaOH",
+        zh: "氫氧化鈉",
+        note: "俗稱：燒鹼（苛性鈉）",
+        confusable: ["Ca(OH)2", "NaCl", "NaHCO3"],
+        reactions: [
+          { desc: "與鹽酸酸鹼中和", eq: "NaOH + HCl → NaCl + H2O" }
+        ]
+      },
+      {
+        symbol: "Ca(OH)2",
+        zh: "氫氧化鈣",
+        note: "俗稱：熟石灰（水溶液為澄清石灰水）",
+        confusable: ["CaCO3", "NaOH", "CaO"],
+        reactions: [
+          { desc: "氧化鈣（生石灰）溶於水", eq: "CaO + H2O → Ca(OH)2" },
+          { desc: "檢驗二氧化碳氣體", eq: "Ca(OH)2 + CO2 → CaCO3 + H2O" }
+        ]
+      },
+      {
+        symbol: "NH3",
+        zh: "氨",
+        note: "有刺激性臭味 · 水溶液呈弱鹼性",
+        confusable: ["CH4", "HNO3", "N2"],
+        reactions: [
+          { desc: "氮氣與氫氣合成氨", eq: "N2 + 3H2 → 2NH3" }
+        ]
+      },
+      {
+        symbol: "CH4",
+        zh: "甲烷",
+        note: "天然氣主要成分",
+        confusable: ["NH3", "C6H12O6", "CO2"],
+        reactions: [
+          { desc: "甲烷完全燃燒", eq: "CH4 + 2O2 → CO2 + 2H2O" }
+        ]
+      },
+      {
+        symbol: "C6H12O6",
+        zh: "葡萄糖",
+        note: "光合作用產物",
+        confusable: ["CH4", "CO2", "C2H5OH"],
+        reactions: [
+          { desc: "生物細胞呼吸作用", eq: "C6H12O6 + 6O2 → 6CO2 + 6H2O" }
+        ]
+      },
+      {
+        symbol: "NaHCO3",
+        zh: "碳酸氫鈉",
+        note: "俗稱：小蘇打（烘焙用）",
+        confusable: ["Na2CO3", "NaOH", "CaCO3"],
+        reactions: [
+          { desc: "加熱小蘇打粉產生二氧化碳", eq: "2NaHCO3 → Na2CO3 + H2O + CO2" }
+        ]
+      },
+      {
+        symbol: "Na2CO3",
+        zh: "碳酸鈉",
+        note: "俗稱：蘇打（洗滌鹼）",
+        confusable: ["NaHCO3", "CaCO3", "NaOH"],
+        reactions: [
+          { desc: "與氯化鈣水溶液產生白色沉澱", eq: "Na2CO3 + CaCl2 → CaCO3 + 2NaCl" }
+        ]
+      }
     ]
   };
 
@@ -784,11 +1057,16 @@
     { r: 3, c: 18, sym: "Ar", zh: "氬", g: "8A" },
     { r: 4, c: 1, sym: "K", zh: "鉀", g: "1A" },
     { r: 4, c: 2, sym: "Ca", zh: "鈣", g: "2A" },
-    { r: 4, c: 3, sym: "Sc", zh: "", g: "B" }, { r: 4, c: 4, sym: "Ti", zh: "", g: "B" },
-    { r: 4, c: 5, sym: "V", zh: "", g: "B" }, { r: 4, c: 6, sym: "Cr", zh: "", g: "B" },
-    { r: 4, c: 7, sym: "Mn", zh: "", g: "B" }, { r: 4, c: 8, sym: "Fe", zh: "", g: "B" },
-    { r: 4, c: 9, sym: "Co", zh: "", g: "B" }, { r: 4, c: 10, sym: "Ni", zh: "", g: "B" },
-    { r: 4, c: 11, sym: "Cu", zh: "", g: "B" }, { r: 4, c: 12, sym: "Zn", zh: "", g: "B" },
+    { r: 4, c: 3, sym: "Sc", zh: "鈧", g: "TRANSITION" },
+    { r: 4, c: 4, sym: "Ti", zh: "鈦", g: "TRANSITION" },
+    { r: 4, c: 5, sym: "V", zh: "釩", g: "TRANSITION" },
+    { r: 4, c: 6, sym: "Cr", zh: "鉻", g: "TRANSITION" },
+    { r: 4, c: 7, sym: "Mn", zh: "錳", g: "TRANSITION" },
+    { r: 4, c: 8, sym: "Fe", zh: "鐵", g: "TRANSITION" },
+    { r: 4, c: 9, sym: "Co", zh: "鈷", g: "TRANSITION" },
+    { r: 4, c: 10, sym: "Ni", zh: "鎳", g: "TRANSITION" },
+    { r: 4, c: 11, sym: "Cu", zh: "銅", g: "TRANSITION" },
+    { r: 4, c: 12, sym: "Zn", zh: "鋅", g: "TRANSITION" },
     { r: 4, c: 13, sym: "Ga", zh: "鎵", g: "3A" },
     { r: 4, c: 14, sym: "Ge", zh: "鍺", g: "4A_ext" },
     { r: 4, c: 15, sym: "As", zh: "砷", g: "5A" },
@@ -801,7 +1079,8 @@
     { r: 5, c: 5, sym: "Nb", zh: "", g: "B" }, { r: 5, c: 6, sym: "Mo", zh: "", g: "B" },
     { r: 5, c: 7, sym: "Tc", zh: "", g: "B" }, { r: 5, c: 8, sym: "Ru", zh: "", g: "B" },
     { r: 5, c: 9, sym: "Rh", zh: "", g: "B" }, { r: 5, c: 10, sym: "Pd", zh: "", g: "B" },
-    { r: 5, c: 11, sym: "Ag", zh: "", g: "B" }, { r: 5, c: 12, sym: "Cd", zh: "", g: "B" },
+    { r: 5, c: 11, sym: "Ag", zh: "銀", g: "TRANSITION" },
+    { r: 5, c: 12, sym: "Cd", zh: "", g: "B" },
     { r: 5, c: 13, sym: "In", zh: "銦", g: "3A_ext" },
     { r: 5, c: 14, sym: "Sn", zh: "錫", g: "4A" },
     { r: 5, c: 15, sym: "Sb", zh: "銻", g: "5A_ext" },
@@ -811,10 +1090,13 @@
     { r: 6, c: 1, sym: "Cs", zh: "銫", g: "1A_ext" },
     { r: 6, c: 2, sym: "Ba", zh: "鋇", g: "2A" },
     { r: 6, c: 3, sym: "La*", zh: "", g: "B" }, { r: 6, c: 4, sym: "Hf", zh: "", g: "B" },
-    { r: 6, c: 5, sym: "Ta", zh: "", g: "B" }, { r: 6, c: 6, sym: "W", zh: "", g: "B" },
+    { r: 6, c: 5, sym: "Ta", zh: "", g: "B" },
+    { r: 6, c: 6, sym: "W", zh: "鎢", g: "TRANSITION" },
     { r: 6, c: 7, sym: "Re", zh: "", g: "B" }, { r: 6, c: 8, sym: "Os", zh: "", g: "B" },
-    { r: 6, c: 9, sym: "Ir", zh: "", g: "B" }, { r: 6, c: 10, sym: "Pt", zh: "", g: "B" },
-    { r: 6, c: 11, sym: "Au", zh: "", g: "B" }, { r: 6, c: 12, sym: "Hg", zh: "", g: "B" },
+    { r: 6, c: 9, sym: "Ir", zh: "", g: "B" },
+    { r: 6, c: 10, sym: "Pt", zh: "鉑", g: "TRANSITION" },
+    { r: 6, c: 11, sym: "Au", zh: "金", g: "TRANSITION" },
+    { r: 6, c: 12, sym: "Hg", zh: "汞", g: "TRANSITION" },
     { r: 6, c: 13, sym: "Tl", zh: "鉈", g: "3A_ext" },
     { r: 6, c: 14, sym: "Pb", zh: "鉛", g: "4A" },
     { r: 6, c: 15, sym: "Bi", zh: "鉍", g: "5A_ext" },
@@ -823,32 +1105,69 @@
     { r: 6, c: 18, sym: "Rn", zh: "氡", g: "8A_ext" }
   ];
 
-  // 幾何星號 SVG（雜誌排版點綴）
   const STAR_SVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"/></svg>`;
-  const SPEAKER_SVG = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`;
 
-  let studentName = localStorage.getItem("chem_student_name") || DEFAULT_STUDENT_NAME;
+  let studentName = localStorage.getItem("chem_student_name") || "";
   let quizState = null;
 
+  // 只把緊接在英文字母或右括號後方的數字轉為下標（保留反應式前方的係數）
   function formatFormula(str) {
-    return str.replace(/(\d+)/g, "<sub>$1</sub>");
+    return str.replace(/([A-Za-z\)])(\d+)/g, "$1<sub>$2</sub>");
   }
 
-  function speakText(text) {
-    if (!("speechSynthesis" in window)) return;
-    window.speechSynthesis.cancel();
-    const utter = new SpeechSynthesisUtterance(text);
-    utter.lang = "zh-TW";
-    utter.rate = 0.9;
-    window.speechSynthesis.speak(utter);
+  // 學生姓名視窗控制
+  function openNameModal() {
+    const modal = document.getElementById("name-modal");
+    const input = document.getElementById("student-name-input");
+    input.value = studentName;
+    modal.classList.add("open");
+    setTimeout(() => input.focus(), 50);
   }
 
-  function changeStudentName() {
-    const input = prompt("輸入學生代號或小名：", studentName);
-    if (input && input.trim()) {
-      studentName = input.trim();
-      localStorage.setItem("chem_student_name", studentName);
-      renderHome();
+  function saveStudentName() {
+    const input = document.getElementById("student-name-input");
+    const val = input.value.trim();
+    if (!val) {
+      input.focus();
+      return;
+    }
+    studentName = val;
+    localStorage.setItem("chem_student_name", studentName);
+    document.getElementById("name-modal").classList.remove("open");
+    renderHome();
+  }
+
+  document.getElementById("student-name-input").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") saveStudentName();
+  });
+
+  // 化合物反應式彈窗控制
+  function openCompoundModal(index) {
+    const item = COMPOUND_CATEGORY.items[index];
+    if (!item) return;
+
+    document.getElementById("modal-compound-title").innerHTML =
+      `<span class="serif" style="color:var(--forest); margin-right:10px;">${formatFormula(item.symbol)}</span>${item.zh}`;
+    document.getElementById("modal-compound-note").textContent = item.note;
+
+    const listEl = document.getElementById("modal-reactions-list");
+    if (item.reactions && item.reactions.length > 0) {
+      listEl.innerHTML = item.reactions.map(r => `
+        <div class="reaction-item">
+          <div class="reaction-desc">${r.desc}</div>
+          <div class="reaction-eq serif">${formatFormula(r.eq)}</div>
+        </div>
+      `).join("");
+    } else {
+      listEl.innerHTML = `<p style="color:var(--ink-muted);">暫無收錄反應式</p>`;
+    }
+
+    document.getElementById("compound-modal").classList.add("open");
+  }
+
+  function closeCompoundModal(e) {
+    if (!e || e.target.id === "compound-modal") {
+      document.getElementById("compound-modal").classList.remove("open");
     }
   }
 
@@ -861,10 +1180,18 @@
     return copy;
   }
 
+  function getCategoryById(catId) {
+    if (catId === "COMPOUNDS") return COMPOUND_CATEGORY;
+    if (catId === "TRANSITION") return TRANSITION_CATEGORY;
+    return ELEMENT_GROUPS.find(g => g.id === catId);
+  }
+
   // ==========================================
-  // 畫面 1：首頁目錄（八族 + 常見化合物 + 右上角全部混考）
+  // 畫面 1：首頁目錄（八族 + 過渡元素 + 常見化合物 + 全部混考）
   // ==========================================
   function renderHome() {
+    const displayStudent = studentName ? `學生：${studentName}` : "點此輸入名字";
+
     const nav = document.getElementById("nav-bar");
     nav.innerHTML = `
       <div class="masthead-left">
@@ -872,7 +1199,7 @@
           <span class="brand-sub serif">CHEM. ARCHIVE / VOL. 01</span>
           <span class="brand-title">國中理化元素圖鑑</span>
         </div>
-        <button class="student-tag" onclick="changeStudentName()">代號：${studentName}</button>
+        <button class="student-tag" onclick="openNameModal()">${displayStudent}</button>
       </div>
       <button class="btn btn-solid" onclick="startQuiz('ALL')">全部混考 ↗</button>
     `;
@@ -894,10 +1221,6 @@
       `;
     }).join("");
 
-    const compoundPreview = COMPOUND_CATEGORY.items
-      .map(i => `${formatFormula(i.symbol)} ${i.zh}`)
-      .join(" / ");
-
     document.getElementById("app").innerHTML = `
       <div class="editorial-header">
         <h2>八族元素分類目錄</h2>
@@ -908,30 +1231,38 @@
         ${groupGridHtml}
       </div>
 
-      <div class="feature-spread" onclick="renderCategory('COMPOUNDS')">
-        <div class="feature-badge-col">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span class="serif" style="font-size:0.9rem; letter-spacing:0.14em; font-weight:800;">NO. 09 / FEATURE</span>
+      <div class="special-grid">
+        <div class="special-card forest-theme" onclick="renderCategory('TRANSITION')">
+          <div class="special-card-top">
+            <span class="serif">NO. 09 / TRANSITION METALS</span>
             ${STAR_SVG}
           </div>
-          <div>
-            <div style="font-size:1.75rem; font-weight:900; margin-top:16px;">常見化合物</div>
-            <div style="font-size:0.95rem; opacity:0.85; margin-top:4px;">共 ${COMPOUND_CATEGORY.items.length} 組國中必背化學式</div>
+          <div class="special-card-bottom">
+            <div class="special-card-title">原子序 21–30 與常見金屬</div>
+            <span class="special-card-arrow">↗</span>
           </div>
         </div>
-        <div class="feature-content-col">
-          <div class="feature-list">${compoundPreview}</div>
+
+        <div class="special-card terracotta-theme" onclick="renderCategory('COMPOUNDS')">
+          <div class="special-card-top">
+            <span class="serif">NO. 10 / FEATURE</span>
+            ${STAR_SVG}
+          </div>
+          <div class="special-card-bottom">
+            <div class="special-card-title">常見化合物</div>
+            <span class="special-card-arrow">↗</span>
+          </div>
         </div>
       </div>
     `;
   }
 
   // ==========================================
-  // 畫面 2：單一分類圖鑑頁（週期表位置圖 + 極簡圖鑑卡 + 右上角開始測驗）
+  // 畫面 2：單一分類圖鑑頁（無發音鈕、化合物可點看反應式）
   // ==========================================
   function renderCategory(catId) {
     const isCompound = catId === "COMPOUNDS";
-    const category = isCompound ? COMPOUND_CATEGORY : ELEMENT_GROUPS.find(g => g.id === catId);
+    const category = getCategoryById(catId);
 
     const nav = document.getElementById("nav-bar");
     nav.innerHTML = `
@@ -939,7 +1270,7 @@
         <button class="btn" onclick="renderHome()">← 返回目錄</button>
         <div class="brand-mark">
           <span class="brand-sub serif">SECTION ${category.num}</span>
-          <span class="brand-title">${category.title}・${category.subtitle}</span>
+          <span class="brand-title">${category.title}</span>
         </div>
       </div>
       <button class="btn btn-solid" onclick="startQuiz('${catId}')">開始測驗 ↗</button>
@@ -982,25 +1313,35 @@
       `;
     }
 
-    const cardsHtml = category.items.map((item, index) => `
-      <div class="specimen-card">
-        <div class="specimen-top">
-          <span class="serif">FIG. ${String(index + 1).padStart(2, "0")}</span>
-          <button class="audio-btn" onclick="speakText('${item.zh}')">${SPEAKER_SVG} 發音</button>
+    const cardsHtml = category.items.map((item, index) => {
+      const clickAttr = isCompound ? `onclick="openCompoundModal(${index})"` : "";
+      const clickCls = isCompound ? "clickable" : "";
+      const rightTag = isCompound ? `<span class="reaction-tag">反應式 ↗</span>` : "";
+
+      return `
+        <div class="specimen-card ${clickCls}" ${clickAttr}>
+          <div class="specimen-top">
+            <span class="serif">FIG. ${String(index + 1).padStart(2, "0")}</span>
+            ${rightTag}
+          </div>
+          <div class="specimen-main">
+            <div class="specimen-symbol serif">${formatFormula(item.symbol)}</div>
+            <div class="specimen-zh">${item.zh}</div>
+          </div>
+          <div class="specimen-note">${item.note}</div>
         </div>
-        <div class="specimen-main">
-          <div class="specimen-symbol serif">${formatFormula(item.symbol)}</div>
-          <div class="specimen-zh">${item.zh}</div>
-        </div>
-        <div class="specimen-note">${item.note}</div>
-      </div>
-    `).join("");
+      `;
+    }).join("");
+
+    const headerSub = isCompound
+      ? `<span class="editorial-meta">點擊任一卡片可檢視相關化學反應式</span>`
+      : `<span class="editorial-meta serif">TOTAL ${category.items.length} ITEMS</span>`;
 
     document.getElementById("app").innerHTML = `
       ${ptableHtml}
       <div class="editorial-header">
         <h2>${category.title}（${category.subtitle}）</h2>
-        <span class="editorial-meta serif">TOTAL ${category.items.length} ITEMS</span>
+        ${headerSub}
       </div>
       <div class="specimen-grid">${cardsHtml}</div>
     `;
@@ -1010,18 +1351,29 @@
   // 畫面 3：隨機雙向測驗引擎
   // ==========================================
   function startQuiz(catId) {
+    if (!studentName) {
+      openNameModal();
+      return;
+    }
+
     let pool = [];
     let categoryTitle = "";
 
-    const allElements = ELEMENT_GROUPS.flatMap(g => g.items);
+    const allElements = [
+      ...ELEMENT_GROUPS.flatMap(g => g.items),
+      ...TRANSITION_CATEGORY.items
+    ];
     const allCompounds = COMPOUND_CATEGORY.items;
 
     if (catId === "ALL") {
       categoryTitle = "全部混考";
-      pool = shuffle([...allElements, ...allCompounds]).slice(0, 12);
+      pool = shuffle([...allElements, ...allCompounds]).slice(0, 15);
     } else if (catId === "COMPOUNDS") {
       categoryTitle = COMPOUND_CATEGORY.title;
       pool = shuffle(allCompounds);
+    } else if (catId === "TRANSITION") {
+      categoryTitle = TRANSITION_CATEGORY.title;
+      pool = shuffle(TRANSITION_CATEGORY.items);
     } else {
       const grp = ELEMENT_GROUPS.find(g => g.id === catId);
       categoryTitle = `${grp.title}（${grp.subtitle}）`;
@@ -1131,8 +1483,6 @@
         quizState.firstTryCorrect++;
       }
 
-      speakText(q.target.zh);
-
       setTimeout(() => {
         quizState.currentIndex++;
         if (quizState.currentIndex < quizState.questions.length) {
@@ -1140,7 +1490,7 @@
         } else {
           finishQuiz();
         }
-      }, 750);
+      }, 650);
     } else {
       btn.classList.add("is-wrong");
       btn.disabled = true;
@@ -1187,7 +1537,7 @@
     document.getElementById("app").innerHTML = `
       <div class="exam-sheet">
         <div class="exam-topbar">
-          <span>${quizState.categoryTitle}</span>
+          <span>${quizState.categoryTitle}（${studentName}）</span>
           <span class="serif">COMPLETED</span>
         </div>
         <div class="exam-body">
@@ -1232,7 +1582,7 @@
   function sendRecordToTeacher(payload) {
     const statusEl = document.getElementById("sync-status");
     if (!GAS_URL) {
-      statusEl.textContent = "單機練習模式（尚未填入後台）";
+      statusEl.textContent = "單機練習模式（尚未填入試算表後台網址）";
       return;
     }
 
@@ -1247,7 +1597,7 @@
           statusEl.style.background = "var(--forest-light)";
           statusEl.style.borderColor = "var(--forest)";
           statusEl.style.color = "var(--forest)";
-          statusEl.textContent = "作答紀錄已同步至後台";
+          statusEl.textContent = "作答紀錄已同步至試算表後台";
         } else {
           throw new Error(data.message);
         }
@@ -1260,7 +1610,11 @@
       });
   }
 
+  // 初始化畫面，若尚未輸入名字則自動跳出輸入視窗
   renderHome();
+  if (!studentName) {
+    openNameModal();
+  }
 </script>
 </body>
 </html>

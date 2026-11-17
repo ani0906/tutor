@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>國中理化｜元素週期表與常見化合物練習</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --text: #1e293b;
+      --subtext: #475569;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --accent: #f59e0b;
+      --accent-hover: #d97706;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --border: #cbd5e1;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: "Microsoft JhengHei", "微軟正黑體", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* 頂部導覽列 */
+    header {
+      background: #ffffff;
+      border-bottom: 2px solid #e2e8f0;
+      padding: 14px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+    }
+
+    .nav-container {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .app-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0;
+    }
+
+    .student-badge {
+      background: #eff6ff;
+      border: 1.5px solid #bfdbfe;
+      color: #1e40af;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 12px;
+      padding: 11px 20px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.1s, background 0.15s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--primary-hover); }
+
+    .btn-accent {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 3px 10px rgba(245, 158, 11, 0.3);
+    }
+    .btn-accent:hover { background: var(--accent-hover); }
+
+    .btn-outline {
+      background: #f8fafc;
+      color: var(--text);
+      border: 2px solid var(--border);
+    }
+    .btn-outline:hover { background: #e2e8f0; }
+
+    /* 主容器 */
+    main {
+      max-width: 1040px;
+      margin: 24px auto;
+      padding: 0 16px 48px;
+    }
+
+    .section-hint {
+      font-size: 1.05rem;
+      color: var(--subtext);
+      margin-bottom: 18px;
+    }
+
+    /* 首頁分類網格 */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .cat-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 2px solid #e2e8f0;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .cat-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.12);
+    }
+
+    .cat-tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      width: fit-content;
+    }
+
+    .cat-name {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin: 4px 0 8px;
+    }
+
+    .cat-preview {
+      font-size: 1rem;
+      color: var(--subtext);
+      font-weight: 600;
+    }
+
+    .compound-banner {
+      margin-top: 24px;
+      background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+      border: 2px solid #6ee7b7;
+    }
+    .compound-banner:hover {
+      border-color: #059669;
+    }
+
+    /* 週期表位置圖 */
+    .ptable-wrapper {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 18px;
+      border: 2px solid #e2e8f0;
+      margin-bottom: 24px;
+      overflow-x: auto;
+    }
+
+    .ptable-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin: 0 0 12px;
+      color: #334155;
+    }
+
+    .ptable-grid {
+      display: grid;
+      grid-template-columns: repeat(18, minmax(38px, 1fr));
+      gap: 4px;
+      min-width: 720px;
+    }
+
+    .pt-cell {
+      aspect-ratio: 1 / 1.08;
+      border-radius: 6px;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: #94a3b8;
+      user-select: none;
+    }
+
+    .pt-cell.empty {
+      background: transparent;
+      border: none;
+    }
+
+    .pt-cell.active-group {
+      color: #ffffff;
+      font-weight: 800;
+      border: 2px solid #0f172a;
+      transform: scale(1.06);
+      z-index: 2;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .pt-cell .sym {
+      font-size: 0.95rem;
+      line-height: 1.1;
+    }
+
+    .pt-cell .zh {
+      font-size: 0.72rem;
+      line-height: 1.1;
+    }
+
+    /* 學習字卡列表 */
+    .study-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .study-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 2px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .study-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .study-symbol {
+      font-size: 2.1rem;
+      font-weight: 900;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+
+    .study-zh {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .study-hint {
+      background: #f8fafc;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 0.98rem;
+      color: #334155;
+      border-left: 4px solid var(--primary);
+    }
+
+    .speak-btn {
+      background: #eff6ff;
+      color: var(--primary);
+      border: 1.5px solid #bfdbfe;
+      border-radius: 10px;
+      padding: 6px 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .speak-btn:hover { background: #dbeafe; }
+
+    /* 測驗模式 */
+    .quiz-box {
+      max-width: 680px;
+      margin: 0 auto;
+      background: var(--card);
+      border-radius: 20px;
+      padding: 28px;
+      border: 2px solid #e2e8f0;
+      box-shadow: 0 6px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .quiz-progress-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-weight: 700;
+      color: var(--subtext);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      transition: width 0.25s ease;
+    }
+
+    .q-direction {
+      display: inline-block;
+      background: #fef3c7;
+      color: #92400e;
+      font-weight: 800;
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+    }
+
+    .q-prompt {
+      font-size: 2.8rem;
+      font-weight: 900;
+      text-align: center;
+      padding: 24px 12px;
+      background: #f8fafc;
+      border-radius: 16px;
+      border: 2px dashed #cbd5e1;
+      margin-bottom: 24px;
+      color: #0f172a;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 540px) {
+      .options-grid { grid-template-columns: 1fr; }
+    }
+
+    .opt-btn {
+      background: #ffffff;
+      border: 2.5px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 18px 14px;
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #1e293b;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: center;
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: #eff6ff;
+    }
+
+    .opt-btn.wrong {
+      background: #fef2f2;
+      border-color: var(--danger);
+      color: var(--danger);
+      opacity: 0.75;
+    }
+
+    .opt-btn.correct {
+      background: #f0fdf4;
+      border-color: var(--success);
+      color: var(--success);
+    }
+
+    .feedback-banner {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 14px;
+      font-size: 1.08rem;
+      font-weight: 700;
+      display: none;
+    }
+
+    .feedback-banner.wrong {
+      display: block;
+      background: #fffbeb;
+      border: 2px solid #f59e0b;
+      color: #92400e;
+    }
+
+    .feedback-banner.correct {
+      display: block;
+      background: #f0fdf4;
+      border: 2px solid #22c55e;
+      color: #166534;
+    }
+
+    /* 結算畫面 */
+    .result-score {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--primary);
+      text-align: center;
+      margin: 12px 0;
+    }
+
+    .sync-status {
+      text-align: center;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 700;
+      margin: 16px 0;
+      background: #f1f5f9;
+      color: #334155;
+    }
+
+    .wrong-review-list {
+      background: #fef2f2;
+      border: 1.5px solid #fecaca;
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav-container" id="nav-bar"></div>
+</header>
+
+<main id="app"></main>
+
+<script>
+  // ==========================================
+  // 【老師設定區】請將 Google Apps Script 網址貼在下方引號內
+  // ==========================================
+  const GAS_URL = "https://script.google.com/macros/s/AKfycbw7fXAF-_Ni4-6jOFQpAbsZoDrNcXMwjAWvpdOWtCbYVa2xLdFuXniU8r_WVk-PHsuluA/exec"; 
+  const DEFAULT_STUDENT_NAME = "資源班小戰士";
+
+  // ==========================================
+  // 國中必背八族元素資料庫
+  // ==========================================
+  const ELEMENT_GROUPS = [
+    {
+      id: "1A",
+      name: "第 1A 族（鹼金屬）",
+      shortName: "第 1A 族",
+      color: "#ef4444",
+      bgLight: "#fee2e2",
+      textDark: "#991b1b",
+      desc: "週期表最左邊第一排！除了「氫」是非金屬之外，鋰、鈉、鉀都是遇水會劇烈反應的活潑金屬。",
+      items: [
+        { symbol: "H", zh: "氫", hint: "最輕的氣體，是非金屬喔！常做為火箭燃料。", confusable: ["He", "Hg"] },
+        { symbol: "Li", zh: "鋰", hint: "手機、電動車「鋰」電池的主角，最輕的金屬。", confusable: ["I", "Al"] },
+        { symbol: "Na", zh: "鈉", hint: "食鹽（氯化鈉）的成分，切開有銀白色光澤，要保存在礦物油中。", confusable: ["K", "N", "Ne"] },
+        { symbol: "K", zh: "鉀", hint: "香蕉裡面含量很豐富！比鈉還要更活潑。", confusable: ["Na", "Ca", "P"] }
+      ]
+    },
+    {
+      id: "2A",
+      name: "第 2A 族（鹼土金屬）",
+      shortName: "第 2A 族",
+      color: "#f97316",
+      bgLight: "#ffedd5",
+      textDark: "#9a3412",
+      desc: "週期表左邊第二排，大多存在於岩石與土壤礦物中，所以叫做「鹼土金屬」。",
+      items: [
+        { symbol: "Be", zh: "鈹", hint: "念作「皮」，在鹼土金屬的最上面。", confusable: ["B", "Ba", "Br"] },
+        { symbol: "Mg", zh: "鎂", hint: "燃燒會發出超刺眼的白光，仙女棒與閃光燈常用。", confusable: ["Mn", "Ag", "Hg"] },
+        { symbol: "Ca", zh: "鈣", hint: "喝牛奶補「鈣」，骨頭、牙齒與大理石都有它。", confusable: ["C", "K", "Cu"] },
+        { symbol: "Ba", zh: "鋇", hint: "念作「貝」，醫院照腸胃 X 光喝的顯影劑（硫酸鋇）。", confusable: ["Be", "B", "Br"] }
+      ]
+    },
+    {
+      id: "3A",
+      name: "第 3A 族（硼族）",
+      shortName: "第 3A 族",
+      color: "#eab308",
+      bgLight: "#fef9c3",
+      textDark: "#854d0e",
+      desc: "跨過中間過渡金屬後的第 13 欄，包含類金屬「硼」與生活中最常見的金屬「鋁」。",
+      items: [
+        { symbol: "B", zh: "硼", hint: "念作「朋」，硼砂、耐熱玻璃的成分，屬於類金屬。", confusable: ["Be", "Ba", "Br"] },
+        { symbol: "Al", zh: "鋁", hint: "鋁箔紙、鋁罐飲料，是地殼中含量最多的金屬。", confusable: ["Ag", "Ar", "Au"] },
+        { symbol: "Ga", zh: "鎵", hint: "念作「家」，熔點只有 29.8°C，放在手心就會融化！", confusable: ["Ca", "Ge"] }
+      ]
+    },
+    {
+      id: "4A",
+      name: "第 4A 族（碳族）",
+      shortName: "第 4A 族",
+      color: "#22c55e",
+      bgLight: "#dcfce7",
+      textDark: "#166534",
+      desc: "有機世界的基礎「碳」與電子科技的核心「矽」都在這一族。",
+      items: [
+        { symbol: "C", zh: "碳", hint: "鑽石、鉛筆芯（石墨）、木炭全都是由碳組成的。", confusable: ["Ca", "Cl", "Cu"] },
+        { symbol: "Si", zh: "矽", hint: "念作「夕」，電腦晶片、半導體的主角，沙子裡含量很多。", confusable: ["S", "Ag", "Sn"] },
+        { symbol: "Sn", zh: "錫", hint: "念作「席」，焊接電路的焊錫、馬口鐵罐頭外層。", confusable: ["Si", "S", "Zn"] },
+        { symbol: "Pb", zh: "鉛", hint: "汽車鉛蓄電池、醫院防輻射背心，密度很大的重金屬。", confusable: ["P", "Pt", "Be"] }
+      ]
+    },
+    {
+      id: "5A",
+      name: "第 5A 族（氮族）",
+      shortName: "第 5A 族",
+      color: "#06b6d4",
+      bgLight: "#cffafe",
+      textDark: "#155e75",
+      desc: "空氣中含量最多的「氮」以及火柴頭上的「磷」都在這一族。",
+      items: [
+        { symbol: "N", zh: "氮", hint: "空氣中佔最多（約 78%），洋芋片包裝裡充的防壓氣體。", confusable: ["Na", "Ne", "Ni"] },
+        { symbol: "P", zh: "磷", hint: "火柴盒側邊摩擦面、骨頭與牙齒的成分，有紅磷和白磷。", confusable: ["Pb", "K", "F"] },
+        { symbol: "As", zh: "砷", hint: "念作「申」，古裝劇毒藥「砒霜」的主要成分。", confusable: ["Ar", "Ag", "Al"] }
+      ]
+    },
+    {
+      id: "6A",
+      name: "第 6A 族（氧族）",
+      shortName: "第 6A 族",
+      color: "#3b82f6",
+      bgLight: "#dbeafe",
+      textDark: "#1e40af",
+      desc: "生物呼吸必備的「氧」與火山溫泉常見的黃色「硫磺」。",
+      items: [
+        { symbol: "O", zh: "氧", hint: "空氣中佔約 21%，呼吸不能沒有它，具有助燃性。", confusable: ["C", "Au", "Os"] },
+        { symbol: "S", zh: "硫", hint: "陽明山硫磺溫泉！常溫下是黃色脆脆的固體。", confusable: ["Si", "Sn", "Na"] }
+      ]
+    },
+    {
+      id: "7A",
+      name: "第 7A 族（鹵素）",
+      shortName: "第 7A 族",
+      color: "#8b5cf6",
+      bgLight: "#ede9fe",
+      textDark: "#5b21b6",
+      desc: "活潑的非金屬家族，常跟金屬結合成鹽類（所以叫「鹵」素），都有毒性與殺菌力。",
+      items: [
+        { symbol: "F", zh: "氟", hint: "念作「弗」，牙膏加「氟」可以預防蛀牙。", confusable: ["Fe", "P", "Cl"] },
+        { symbol: "Cl", zh: "氯", hint: "念作「綠」，游泳池與自來水消毒、漂白水的主要成分。", confusable: ["C", "Ca", "Cr"] },
+        { symbol: "Br", zh: "溴", hint: "念作「臭」，常溫下唯一的「液態非金屬」，暗紅色會揮發。", confusable: ["B", "Be", "Ba"] },
+        { symbol: "I", zh: "碘", hint: "醫院擦傷口用的「優碘」，遇到澱粉會變成藍紫色。", confusable: ["Li", "Fe", "Cl"] }
+      ]
+    },
+    {
+      id: "8A",
+      name: "第 8A 族（鈍氣／稀有氣體）",
+      shortName: "第 8A 族",
+      color: "#ec4899",
+      bgLight: "#fce7f3",
+      textDark: "#9d174d",
+      desc: "週期表最右邊一排！個性超穩定、幾乎不跟別人發生化學反應，常溫都是無色氣體。",
+      items: [
+        { symbol: "He", zh: "氦", hint: "念作「害」，安全氣球填充氣體，第二輕的氣體且不會燃燒。", confusable: ["H", "Ne", "Hg"] },
+        { symbol: "Ne", zh: "氖", hint: "念作「乃」，霓虹燈招牌裡通電會發紅光的氣體。", confusable: ["Na", "N", "He"] },
+        { symbol: "Ar", zh: "氬", hint: "念作「亞」，空氣中含量第三多的氣體（約 0.9%），燈泡填充氣體。", confusable: ["Al", "Ag", "As"] }
+      ]
+    }
+  ];
+
+  // ==========================================
+  // 國中常見化合物資料庫
+  // ==========================================
+  const COMPOUND_CATEGORY = {
+    id: "COMPOUNDS",
+    name: "常見化合物",
+    shortName: "常見化合物",
+    color: "#059669",
+    bgLight: "#d1fae5",
+    textDark: "#065f46",
+    desc: "國中理化考試最常出現的化學式，注意數字下標與原子團括號的位置！",
+    items: [
+      { symbol: "H2O", zh: "水", hint: "2 個氫原子 ＋ 1 個氧原子，生命之源。", confusable: ["H2O2", "OH-", "H2SO4"] },
+      { symbol: "CO2", zh: "二氧化碳", hint: "人呼出的氣體，能使澄清石灰水變混濁，乾冰就是固態的它。", confusable: ["CO", "CaCO3", "O2"] },
+      { symbol: "CO", zh: "一氧化碳", hint: "熱水器通風不良燃燒不完全產生，無色無味劇毒氣體。", confusable: ["CO2", "CuO", "CaO"] },
+      { symbol: "NaCl", zh: "氯化鈉（食鹽）", hint: "家裡煮菜調味用的食鹽，鈉離子＋氯離子。", confusable: ["NaOH", "Na2CO3", "HCl"] },
+      { symbol: "CaCO3", zh: "碳酸鈣", hint: "大理石、貝殼、蛋殼、石灰岩的主要成分，加鹽酸會冒二氧化碳泡泡。", confusable: ["Ca(OH)2", "Na2CO3", "CO2"] },
+      { symbol: "HCl", zh: "氯化氫（鹽酸）", hint: "胃酸的主要成分，也是實驗室最常見的強酸。", confusable: ["H2SO4", "NaCl", "HNO3"] },
+      { symbol: "H2SO4", zh: "硫酸", hint: "汽車電瓶液，無色油狀強酸，有很強的脫水性（會讓糖變黑炭）。", confusable: ["HCl", "H2O", "Na2SO4"] },
+      { symbol: "NaOH", zh: "氫氧化鈉（燒鹼）", hint: "又叫苛性鈉，通水管清潔劑成分，摸起來滑滑的強鹼。", confusable: ["Ca(OH)2", "NaCl", "NaHCO3"] },
+      { symbol: "Ca(OH)2", zh: "氫氧化鈣（熟石灰）", hint: "水溶液就是用來檢驗二氧化碳的「澄清石灰水」。", confusable: ["CaCO3", "NaOH", "CaO"] },
+      { symbol: "NH3", zh: "氨（阿摩尼亞）", hint: "有刺鼻尿騷味的氣體，比空氣輕，極易溶於水呈弱鹼性。", confusable: ["CH4", "HNO3", "N2"] },
+      { symbol: "CH4", zh: "甲烷", hint: "天然氣、沼氣的主要成分，也是牛放屁產生的溫室氣體。", confusable: ["NH3", "C6H12O6", "CO2"] },
+      { symbol: "C6H12O6", zh: "葡萄糖", hint: "植物光合作用的產物，生物細胞呼吸產生能量的直接來源。", confusable: ["CH4", "CO2", "C2H5OH"] },
+      { symbol: "NaHCO3", zh: "碳酸氫鈉（小蘇打）", hint: "做蛋糕的烘焙膨脹劑、乾粉滅火器成分，加熱會產生二氧化碳。", confusable: ["Na2CO3", "NaOH", "CaCO3"] },
+      { symbol: "Na2CO3", zh: "碳酸鈉（蘇打）", hint: "又叫洗滌鹼，用來去除油污，比小蘇打鹼性更強。", confusable: ["NaHCO3", "CaCO3", "NaOH"] }
+    ]
+  };
+
+  // ==========================================
+  // 完整 18 欄週期表座標骨架（第 1～6 週期）
+  // ==========================================
+  const PTABLE_LAYOUT = [
+    // row 1
+    { r: 1, c: 1, sym: "H", zh: "氫", g: "1A" },
+    { r: 1, c: 18, sym: "He", zh: "氦", g: "8A" },
+    // row 2
+    { r: 2, c: 1, sym: "Li", zh: "鋰", g: "1A" },
+    { r: 2, c: 2, sym: "Be", zh: "鈹", g: "2A" },
+    { r: 2, c: 13, sym: "B", zh: "硼", g: "3A" },
+    { r: 2, c: 14, sym: "C", zh: "碳", g: "4A" },
+    { r: 2, c: 15, sym: "N", zh: "氮", g: "5A" },
+    { r: 2, c: 16, sym: "O", zh: "氧", g: "6A" },
+    { r: 2, c: 17, sym: "F", zh: "氟", g: "7A" },
+    { r: 2, c: 18, sym: "Ne", zh: "氖", g: "8A" },
+    // row 3
+    { r: 3, c: 1, sym: "Na", zh: "鈉", g: "1A" },
+    { r: 3, c: 2, sym: "Mg", zh: "鎂", g: "2A" },
+    { r: 3, c: 13, sym: "Al", zh: "鋁", g: "3A" },
+    { r: 3, c: 14, sym: "Si", zh: "矽", g: "4A" },
+    { r: 3, c: 15, sym: "P", zh: "磷", g: "5A" },
+    { r: 3, c: 16, sym: "S", zh: "硫", g: "6A" },
+    { r: 3, c: 17, sym: "Cl", zh: "氯", g: "7A" },
+    { r: 3, c: 18, sym: "Ar", zh: "氬", g: "8A" },
+    // row 4
+    { r: 4, c: 1, sym: "K", zh: "鉀", g: "1A" },
+    { r: 4, c: 2, sym: "Ca", zh: "鈣", g: "2A" },
+    { r: 4, c: 3, sym: "Sc", zh: "", g: "B" }, { r: 4, c: 4, sym: "Ti", zh: "", g: "B" },
+    { r: 4, c: 5, sym: "V", zh: "", g: "B" }, { r: 4, c: 6, sym: "Cr", zh: "", g: "B" },
+    { r: 4, c: 7, sym: "Mn", zh: "", g: "B" }, { r: 4, c: 8, sym: "Fe", zh: "", g: "B" },
+    { r: 4, c: 9, sym: "Co", zh: "", g: "B" }, { r: 4, c: 10, sym: "Ni", zh: "", g: "B" },
+    { r: 4, c: 11, sym: "Cu", zh: "", g: "B" }, { r: 4, c: 12, sym: "Zn", zh: "", g: "B" },
+    { r: 4, c: 13, sym: "Ga", zh: "鎵", g: "3A" },
+    { r: 4, c: 14, sym: "Ge", zh: "鍺", g: "4A_ext" },
+    { r: 4, c: 15, sym: "As", zh: "砷", g: "5A" },
+    { r: 4, c: 16, sym: "Se", zh: "硒", g: "6A_ext" },
+    { r: 4, c: 17, sym: "Br", zh: "溴", g: "7A" },
+    { r: 4, c: 18, sym: "Kr", zh: "氪", g: "8A_ext" },
+    // row 5
+    { r: 5, c: 1, sym: "Rb", zh: "銣", g: "1A_ext" },
+    { r: 5, c: 2, sym: "Sr", zh: "鍶", g: "2A_ext" },
+    { r: 5, c: 3, sym: "Y", zh: "", g: "B" }, { r: 5, c: 4, sym: "Zr", zh: "", g: "B" },
+    { r: 5, c: 5, sym: "Nb", zh: "", g: "B" }, { r: 5, c: 6, sym: "Mo", zh: "", g: "B" },
+    { r: 5, c: 7, sym: "Tc", zh: "", g: "B" }, { r: 5, c: 8, sym: "Ru", zh: "", g: "B" },
+    { r: 5, c: 9, sym: "Rh", zh: "", g: "B" }, { r: 5, c: 10, sym: "Pd", zh: "", g: "B" },
+    { r: 5, c: 11, sym: "Ag", zh: "", g: "B" }, { r: 5, c: 12, sym: "Cd", zh: "", g: "B" },
+    { r: 5, c: 13, sym: "In", zh: "銦", g: "3A_ext" },
+    { r: 5, c: 14, sym: "Sn", zh: "錫", g: "4A" },
+    { r: 5, c: 15, sym: "Sb", zh: "銻", g: "5A_ext" },
+    { r: 5, c: 16, sym: "Te", zh: "碲", g: "6A_ext" },
+    { r: 5, c: 17, sym: "I", zh: "碘", g: "7A" },
+    { r: 5, c: 18, sym: "Xe", zh: "氙", g: "8A_ext" },
+    // row 6
+    { r: 6, c: 1, sym: "Cs", zh: "銫", g: "1A_ext" },
+    { r: 6, c: 2, sym: "Ba", zh: "鋇", g: "2A" },
+    { r: 6, c: 3, sym: "La*", zh: "", g: "B" }, { r: 6, c: 4, sym: "Hf", zh: "", g: "B" },
+    { r: 6, c: 5, sym: "Ta", zh: "", g: "B" }, { r: 6, c: 6, sym: "W", zh: "", g: "B" },
+    { r: 6, c: 7, sym: "Re", zh: "", g: "B" }, { r: 6, c: 8, sym: "Os", zh: "", g: "B" },
+    { r: 6, c: 9, sym: "Ir", zh: "", g: "B" }, { r: 6, c: 10, sym: "Pt", zh: "", g: "B" },
+    { r: 6, c: 11, sym: "Au", zh: "", g: "B" }, { r: 6, c: 12, sym: "Hg", zh: "", g: "B" },
+    { r: 6, c: 13, sym: "Tl", zh: "鉈", g: "3A_ext" },
+    { r: 6, c: 14, sym: "Pb", zh: "鉛", g: "4A" },
+    { r: 6, c: 15, sym: "Bi", zh: "鉍", g: "5A_ext" },
+    { r: 6, c: 16, sym: "Po", zh: "釙", g: "6A_ext" },
+    { r: 6, c: 17, sym: "At", zh: "砈", g: "7A_ext" },
+    { r: 6, c: 18, sym: "Rn", zh: "氡", g: "8A_ext" }
+  ];
+
+  // 狀態管理
+  let studentName = localStorage.getItem("chem_student_name") || DEFAULT_STUDENT_NAME;
+  let quizState = null;
+
+  // 工具函式：把化學式數字轉為下標 HTML (例如 H2O -> H<sub>2</sub>O)
+  function formatFormula(str) {
+    return str.replace(/(\d+)/g, "<sub>$1</sub>");
+  }
+
+  // 工具函式：語音朗讀
+  function speakText(text) {
+    if (!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = "zh-TW";
+    utter.rate = 0.9;
+    window.speechSynthesis.speak(utter);
+  }
+
+  // 更改學生代號（避免放真實全名，可用小名或座號）
+  function changeStudentName() {
+    const input = prompt("請輸入你的小名或座號（會記錄在老師的成績單上）：", studentName);
+    if (input && input.trim()) {
+      studentName = input.trim();
+      localStorage.setItem("chem_student_name", studentName);
+      renderHome();
+    }
+  }
+
+  // 洗牌演算法
+  function shuffle(arr) {
+    const copy = [...arr];
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  }
+
+  // ==========================================
+  // 畫面 1：首頁（八族 + 常見化合物 + 右上角全部混考）
+  // ==========================================
+  function renderHome() {
+    const nav = document.getElementById("nav-bar");
+    nav.innerHTML = `
+      <div class="nav-left">
+        <h1 class="app-title">🧪 國中理化｜元素與化合物</h1>
+        <button class="student-badge" onclick="changeStudentName()" title="點擊修改代號">
+          👤 ${studentName} ✎
+        </button>
+      </div>
+      <button class="btn btn-accent" onclick="startQuiz('ALL')">🔥 全部混考</button>
+    `;
+
+    const app = document.getElementById("app");
+    let groupCardsHtml = ELEMENT_GROUPS.map(g => {
+      const previewList = g.items.map(i => `${i.symbol} ${i.zh}`).join("、");
+      return `
+        <div class="cat-card" onclick="renderCategory('${g.id}')">
+          <div>
+            <span class="cat-tag" style="background:${g.bgLight}; color:${g.textDark};">${g.shortName}</span>
+            <div class="cat-name">${g.name.replace(g.shortName, "").replace(/[（）]/g, "") || g.shortName}</div>
+          </div>
+          <div class="cat-preview">${previewList}</div>
+        </div>
+      `;
+    }).join("");
+
+    const compoundPreview = COMPOUND_CATEGORY.items.slice(0, 6).map(i => `${formatFormula(i.symbol)} ${i.zh}`).join("、") + "…";
+
+    app.innerHTML = `
+      <p class="section-hint">點選下方的<strong>八族元素</strong>或<strong>常見化合物</strong>進去複習，準備好就能按右上角開始測驗！</p>
+      <div class="category-grid">
+        ${groupCardsHtml}
+      </div>
+      <div class="cat-card compound-banner" onclick="renderCategory('COMPOUNDS')">
+        <div>
+          <span class="cat-tag" style="background:#059669; color:#fff;">國中必考化學式</span>
+          <div class="cat-name">🧬 常見化合物（共 ${COMPOUND_CATEGORY.items.length} 個）</div>
+        </div>
+        <div class="cat-preview">${compoundPreview}</div>
+      </div>
+    `;
+  }
+
+  // ==========================================
+  // 畫面 2：單一分類瀏覽（週期表位置圖 + 學習卡 + 右上角開始測驗）
+  // ==========================================
+  function renderCategory(catId) {
+    const isCompound = catId === "COMPOUNDS";
+    const category = isCompound ? COMPOUND_CATEGORY : ELEMENT_GROUPS.find(g => g.id === catId);
+
+    const nav = document.getElementById("nav-bar");
+    nav.innerHTML = `
+      <div class="nav-left">
+        <button class="btn btn-outline" onclick="renderHome()">← 返回主頁</button>
+        <h1 class="app-title">${category.name}</h1>
+      </div>
+      <button class="btn btn-primary" onclick="startQuiz('${catId}')">🎯 開始測驗</button>
+    `;
+
+    // 若為八族元素，繪製週期表亮燈位置圖
+    let ptableHtml = "";
+    if (!isCompound) {
+      const targetSymbols = new Set(category.items.map(i => i.symbol));
+      let cellsHtml = "";
+      for (let r = 1; r <= 6; r++) {
+        for (let c = 1; c <= 18; c++) {
+          const cell = PTABLE_LAYOUT.find(item => item.r === r && item.c === c);
+          if (!cell) {
+            cellsHtml += `<div class="pt-cell empty"></div>`;
+          } else {
+            const isTarget = targetSymbols.has(cell.sym);
+            const isSameCol = cell.g === catId || cell.g === `${catId}_ext`;
+            let style = "";
+            let cls = "pt-cell";
+            if (isTarget) {
+              cls += " active-group";
+              style = `background:${category.color};`;
+            } else if (isSameCol) {
+              style = `background:${category.bgLight}; color:${category.textDark}; border-color:${category.color};`;
+            }
+            cellsHtml += `
+              <div class="${cls}" style="${style}">
+                <span class="sym">${cell.sym}</span>
+                ${isTarget ? `<span class="zh">${cell.zh}</span>` : ""}
+              </div>
+            `;
+          }
+        }
+      }
+
+      ptableHtml = `
+        <div class="ptable-wrapper">
+          <div class="ptable-title">📍 在化學元素週期表上的位置（亮色直排就是「${category.shortName}」）</div>
+          <div class="ptable-grid">${cellsHtml}</div>
+        </div>
+      `;
+    }
+
+    const cardsHtml = category.items.map(item => `
+      <div class="study-card">
+        <div class="study-top">
+          <span class="study-symbol" style="color:${category.color};">${formatFormula(item.symbol)}</span>
+          <button class="speak-btn" onclick="speakText('${item.zh.replace(/[（）]/g, "，")}')">🔊 念給我聽</button>
+        </div>
+        <div class="study-zh">${item.zh}</div>
+        <div class="study-hint" style="border-left-color:${category.color};">💡 ${item.hint}</div>
+      </div>
+    `).join("");
+
+    document.getElementById("app").innerHTML = `
+      <p class="section-hint">${category.desc}</p>
+      ${ptableHtml}
+      <div class="study-grid">${cardsHtml}</div>
+    `;
+  }
+
+  // ==========================================
+  // 畫面 3：隨機雙向測驗引擎（英文選中文 / 中文選英文）
+  // ==========================================
+  function startQuiz(catId) {
+    let pool = [];
+    let categoryTitle = "";
+
+    const allElements = ELEMENT_GROUPS.flatMap(g => g.items);
+    const allCompounds = COMPOUND_CATEGORY.items;
+
+    if (catId === "ALL") {
+      categoryTitle = "全部大混考";
+      // 混考從所有元素與化合物中隨機抽出 12 題，避免一次太多題疲乏
+      pool = shuffle([...allElements, ...allCompounds]).slice(0, 12);
+    } else if (catId === "COMPOUNDS") {
+      categoryTitle = COMPOUND_CATEGORY.name;
+      pool = shuffle(allCompounds);
+    } else {
+      const grp = ELEMENT_GROUPS.find(g => g.id === catId);
+      categoryTitle = grp.name;
+      // 若該族只有 2~3 個元素，重複一輪變成 4~6 題，確保中選英、英選中都能練到
+      pool = grp.items.length < 4
+        ? shuffle([...grp.items, ...grp.items])
+        : shuffle(grp.items);
+    }
+
+    // 建立題目清單（每題隨機決定方向：SYM_TO_ZH 或 ZH_TO_SYM）
+    const questions = pool.map(target => {
+      const isCompoundItem = allCompounds.some(c => c.symbol === target.symbol);
+      const distractorSource = isCompoundItem ? allCompounds : allElements;
+      const mode = Math.random() < 0.5 ? "SYM_TO_ZH" : "ZH_TO_SYM";
+
+      // 優先挑出容易搞混的誘答選項
+      let distractors = [];
+      if (target.confusable) {
+        target.confusable.forEach(sym => {
+          const found = distractorSource.find(x => x.symbol === sym && x.symbol !== target.symbol);
+          if (found && distractors.length < 3) distractors.push(found);
+        });
+      }
+      // 不足 3 個誘答時，從同類題庫隨機補足
+      const remaining = shuffle(distractorSource.filter(x => x.symbol !== target.symbol && !distractors.some(d => d.symbol === x.symbol)));
+      while (distractors.length < 3 && remaining.length > 0) {
+        distractors.push(remaining.pop());
+      }
+
+      const options = shuffle([target, ...distractors]);
+      return {
+        target,
+        mode,
+        options,
+        answeredWrongOnce: false
+      };
+    });
+
+    quizState = {
+      catId,
+      categoryTitle,
+      questions,
+      currentIndex: 0,
+      firstTryCorrect: 0,
+      wrongSet: new Set(),
+      startTime: Date.now()
+    };
+
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    const q = quizState.questions[quizState.currentIndex];
+    const total = quizState.questions.length;
+    const progressPct = Math.round((quizState.currentIndex / total) * 100);
+
+    const nav = document.getElementById("nav-bar");
+    nav.innerHTML = `
+      <div class="nav-left">
+        <button class="btn btn-outline" onclick="exitQuiz()">✕ 結束測驗</button>
+        <h1 class="app-title">測驗中：${quizState.categoryTitle}</h1>
+      </div>
+      <span style="font-weight:800; color:#475569;">第 ${quizState.currentIndex + 1} / ${total} 題</span>
+    `;
+
+    const isSymToZh = q.mode === "SYM_TO_ZH";
+    const directionLabel = isSymToZh ? "🔤 看符號／化學式 ➔ 選出正確中文" : "🀄 看中文名稱 ➔ 選出正確符號／化學式";
+    const promptHtml = isSymToZh ? formatFormula(q.target.symbol) : q.target.zh;
+
+    const optionsHtml = q.options.map((opt, idx) => {
+      const label = isSymToZh ? opt.zh : formatFormula(opt.symbol);
+      return `<button class="opt-btn" id="opt-${idx}" onclick="checkAnswer(${idx})">${label}</button>`;
+    }).join("");
+
+    document.getElementById("app").innerHTML = `
+      <div class="quiz-box">
+        <div class="quiz-progress-wrap">
+          <span>進度</span>
+          <span>${quizState.currentIndex + 1} / ${total}</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:${progressPct}%"></div>
+        </div>
+
+        <div style="text-align:center;">
+          <span class="q-direction">${directionLabel}</span>
+        </div>
+        <div class="q-prompt">${promptHtml}</div>
+
+        <div class="options-grid">${optionsHtml}</div>
+        <div id="feedback" class="feedback-banner"></div>
+      </div>
+    `;
+  }
+
+  function checkAnswer(selectedIndex) {
+    const q = quizState.questions[quizState.currentIndex];
+    const chosen = q.options[selectedIndex];
+    const btn = document.getElementById(`opt-${selectedIndex}`);
+    const feedback = document.getElementById("feedback");
+
+    if (chosen.symbol === q.target.symbol) {
+      // 答對！
+      btn.classList.add("correct");
+      document.querySelectorAll(".opt-btn").forEach(b => b.disabled = true);
+
+      if (!q.answeredWrongOnce) {
+        quizState.firstTryCorrect++;
+      }
+
+      feedback.className = "feedback-banner correct";
+      feedback.innerHTML = `🎉 答對了！<strong>${formatFormula(q.target.symbol)}</strong> 就是 <strong>${q.target.zh}</strong>！`;
+      speakText(q.target.zh.replace(/[（）]/g, "，"));
+
+      setTimeout(() => {
+        quizState.currentIndex++;
+        if (quizState.currentIndex < quizState.questions.length) {
+          renderQuestion();
+        } else {
+          finishQuiz();
+        }
+      }, 950);
+    } else {
+      // 答錯：標記錯題並給記憶小提示，讓學生當場重選到對
+      btn.classList.add("wrong");
+      btn.disabled = true;
+      q.answeredWrongOnce = true;
+      quizState.wrongSet.add(`${q.target.symbol}(${q.target.zh})`);
+
+      feedback.className = "feedback-banner wrong";
+      feedback.innerHTML = `再試一次喔！小提示：${q.target.hint}`;
+    }
+  }
+
+  function exitQuiz() {
+    if (confirm("確定要中斷這次測驗返回嗎？目前的進度不會送出喔！")) {
+      if (quizState.catId === "ALL") renderHome();
+      else renderCategory(quizState.catId);
+    }
+  }
+
+  // ==========================================
+  // 畫面 4：結算成績單 ＋ 自動傳送紀錄給老師
+  // ==========================================
+  function finishQuiz() {
+    const total = quizState.questions.length;
+    const score = quizState.firstTryCorrect;
+    const accuracy = Math.round((score / total) * 100);
+    const durationSec = Math.round((Date.now() - quizState.startTime) / 1000);
+    const wrongList = Array.from(quizState.wrongSet);
+
+    const nav = document.getElementById("nav-bar");
+    nav.innerHTML = `
+      <div class="nav-left">
+        <button class="btn btn-outline" onclick="renderHome()">← 返回主頁</button>
+        <h1 class="app-title">練習完成！</h1>
+      </div>
+    `;
+
+    let praise = "太棒了！全部一次就答對，記憶力超強！🏆";
+    if (accuracy < 100 && accuracy >= 70) praise = "表現很不錯喔！把下面有卡關的再看兩眼就無敵了！💪";
+    if (accuracy < 70) praise = "辛苦了！有練習就有進步，把錯題提示看一看再挑戰一次吧！🌟";
+
+    const wrongHtml = wrongList.length > 0
+      ? `<div class="wrong-review-list">
+           <strong>📌 這次曾經猶豫或答錯的項目（建議再複習一下）：</strong><br>
+           <span style="font-size:1.15rem; font-weight:800; color:#b91c1c;">${wrongList.join("、")}</span>
+         </div>`
+      : "";
+
+    document.getElementById("app").innerHTML = `
+      <div class="quiz-box" style="text-align:center;">
+        <div style="font-size:1.2rem; font-weight:800; color:#475569;">${quizState.categoryTitle} 結算成績</div>
+        <div class="result-score">${score} / ${total} 題</div>
+        <div style="font-size:1.15rem; font-weight:700; margin-bottom:12px;">一次答對率：${accuracy}% ｜ 花費時間：${durationSec} 秒</div>
+        <p style="font-size:1.1rem; font-weight:700; color:#0f172a;">${praise}</p>
+
+        <div id="sync-status" class="sync-status">⏳ 正在傳送練習紀錄給老師...</div>
+
+        ${wrongHtml}
+
+        <div style="display:flex; gap:12px; justify-content:center; margin-top:24px; flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="startQuiz('${quizState.catId}')">🔄 再練一次</button>
+          <button class="btn btn-outline" onclick="renderHome()">🏠 回主頁選其他單元</button>
+        </div>
+      </div>
+    `;
+
+    sendRecordToTeacher({
+      studentName,
+      category: quizState.categoryTitle,
+      firstTryScore: score,
+      totalQuestions: total,
+      accuracy: `${accuracy}%`,
+      wrongItems: wrongList.length > 0 ? wrongList.join("、") : "全對！",
+      durationSec
+    });
+  }
+
+  function sendRecordToTeacher(payload) {
+    const statusEl = document.getElementById("sync-status");
+    if (!GAS_URL) {
+      statusEl.innerHTML = "ℹ️ 目前為單機練習模式（尚未綁定老師後台網址）";
+      return;
+    }
+
+    fetch(GAS_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === "success") {
+          statusEl.style.background = "#dcfce7";
+          statusEl.style.color = "#166534";
+          statusEl.innerHTML = "✅ 練習紀錄已自動傳送到老師的 Google 試算表！";
+        } else {
+          throw new Error(data.message);
+        }
+      })
+      .catch(() => {
+        statusEl.style.background = "#fef2f2";
+        statusEl.style.color = "#991b1b";
+        statusEl.innerHTML = "⚠️ 網路不穩，紀錄暫時未能送出（可以截圖此畫面傳給老師喔！）";
+      });
+  }
+
+  // 啟動首頁
+  renderHome();
+</script>
+</body>
+</html>
